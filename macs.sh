@@ -8,18 +8,18 @@
 ###FILES
 #------
 location="/rgs01/project_space/abrahgrp/Software_Dev_Sandbox/common/101madetunji/ToilGettingThere"
-parameters="$location/$1" #inputparameters.yml"
-script="$location/workflows/macs.cwl" #ToilChipSeq-1st-mapping.cwl"
+parameters="$location/temp-parameters.yml"
+script="$location/workflows/macs.cwl"
 
 OLD_UUID=$1
 NEW_UUID=${NEW_UUID:=${OLD_UUID%%.yml}} #reuse old file
 NEW_UUID=${NEW_UUID:=$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 5 | head -n 1)"_"`date +%s`} #temporary file for the 2nd step
 
 #temporary output & error files
-out="$(pwd)/"$NEW_UUID"-outdir"
-tmp="$(pwd)/"$NEW_UUID"-tmpdir"
-jobstore="$(pwd)/"$NEW_UUID"-macsjobstore"
-logtxt="$(pwd)/"$NEW_UUID"-macslog.txt"
+out="macs-"$NEW_UUID"-outdir"
+tmp="macs-"$NEW_UUID"-tmpdir"
+jobstore="macs-"$NEW_UUID"-jobstore"
+logtxt="macs-"$NEW_UUID"-log.txt"
 logout="macs-"$NEW_UUID"-outfile_out"
 logerr="macs-"$NEW_UUID"-outfile_err"
 

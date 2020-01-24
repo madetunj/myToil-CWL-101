@@ -16,16 +16,17 @@ NEW_UUID=${NEW_UUID:=${OLD_UUID%%.yml}} #reuse old file
 NEW_UUID=${NEW_UUID:=$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 5 | head -n 1)"_"`date +%s`} #temporary file for the 2nd step
 
 #temporary output & error files
-out="$(pwd)/"$NEW_UUID"-outdir-visual"
-tmp="$(pwd)/"$NEW_UUID"-tmpdir-visual"
-jobstore="$(pwd)/"$NEW_UUID"-jobstore-visual"
-logtxt="$(pwd)/"$NEW_UUID"-log.txt-visual"
-logout="chipseq-"$NEW_UUID"-outfile_out-visual"
-logerr="chipseq-"$NEW_UUID"-outfile_err-visual"
+out="visual-"$NEW_UUID"-outdir"
+tmp="visual-"$NEW_UUID"-tmpdir"
+jobstore="visual-"$NEW_UUID"-jobstore"
+logtxt="visual-"$NEW_UUID"-log.txt"
+logout="visual-"$NEW_UUID"-outfile_out"
+logerr="visual-"$NEW_UUID"-outfile_err"
 
 #------
 ###Modules & PATH update
 #------
+module load python/3.7.0            
 module load node
 module load igvtools/2.3.2
 module load fastqc/0.11.5
@@ -38,7 +39,6 @@ module load bedtools/2.25.0
 module load meme/4.11.2
 module load bedops/2.4.2
 module load java/1.8.0_60
-module load python/3.7.0
 module load BAM2GFF/1.1.0
 module load ROSE/1.1.0
  
