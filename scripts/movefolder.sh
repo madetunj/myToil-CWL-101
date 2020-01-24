@@ -1,6 +1,0 @@
-AMEDIR=$1
-MEMEDIR=$2
-FINALDIR=$3
-cp -rf $AMEDIR ame_out
-cp -rf $MEMEDIR $FINALDIR
-mv ame_out $FINALDIR/
