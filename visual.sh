@@ -16,8 +16,8 @@ NEW_UUID=${NEW_UUID:=${OLD_UUID%%.yml}} #reuse old file
 NEW_UUID=${NEW_UUID:=$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 5 | head -n 1)"_"`date +%s`} #temporary file for the 2nd step
 
 #temporary output & error files
-out="visual-"$NEW_UUID"-outdir"
-tmp="visual-"$NEW_UUID"-tmpdir"
+out="$(pwd)/visual-"$NEW_UUID"-outdir"
+tmp="$(pwd)/visual-"$NEW_UUID"-tmpdir"
 jobstore="visual-"$NEW_UUID"-jobstore"
 logtxt="visual-"$NEW_UUID"-log.txt"
 logout="visual-"$NEW_UUID"-outfile_out"
