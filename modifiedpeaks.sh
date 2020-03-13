@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 #------
 ###SYNTAX to run
-#bsub -P watcher -q compbio -J qcpeaks-toil -o qcpeaks-toil_out -e qcpeaks-toil_err -N ./qcpeaks.sh
+#bsub -P watcher -q compbio -J modifiedpeaks-toil -o modifiedpeaks-toil_out -e modifiedpeaks-toil_err -N ./modifiedpeaks.sh
 ####
 
 #------
@@ -9,19 +9,19 @@
 #------
 location="/rgs01/project_space/abrahgrp/Software_Dev_Sandbox/common/101madetunji/ToilGettingThere"
 parameters="$location/temp-parameters.yml" #$1" #inputparameters.yml"
-script="$location/workflows/qcpeaks.cwl" #ToilChipSeq-1st-mapping.cwl"
+script="$location/workflows/modifiedpeaks.cwl" #ToilChipSeq-1st-mapping.cwl"
 
 OLD_UUID=$1
 NEW_UUID=${NEW_UUID:=${OLD_UUID%%.yml}} #reuse old file
 NEW_UUID=${NEW_UUID:=$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 5 | head -n 1)"_"`date +%s`} #temporary file for the 2nd step
 
 #temporary output & error files
-out="$(pwd)/qcpeaks-"$NEW_UUID"-outdir"
-tmp="$(pwd)/qcpeaks-"$NEW_UUID"-tmpdir"
-jobstore="qcpeaks-"$NEW_UUID"-jobstore"
-logtxt="qcpeaks-"$NEW_UUID"-log.txt"
-logout="qcpeaks-"$NEW_UUID"-outfile_out"
-logerr="qcpeaks-"$NEW_UUID"-outfile_err"
+out="$(pwd)/modifiedpeaks-"$NEW_UUID"-outdir"
+tmp="$(pwd)/modifiedpeaks-"$NEW_UUID"-tmpdir"
+jobstore="modifiedpeaks-"$NEW_UUID"-jobstore"
+logtxt="modifiedpeaks-"$NEW_UUID"-log.txt"
+logout="modifiedpeaks-"$NEW_UUID"-outfile_out"
+logerr="modifiedpeaks-"$NEW_UUID"-outfile_err"
 
 rm -rf $jobstore $logtxt $logout $logerr
 
@@ -32,7 +32,8 @@ module load R/3.6.1
 module load bedtools/2.25.0
 module load bedops/2.4.2
 
-export R_LIBS_USER=$R_LIBS_USER:$location/R/3.6.custom #to find SPP local package
+#export R_LIBS_USER=$R_LIBS_USER:~/R/x86_64-pc-linux-gnu-library/3.6
+export R_LIBS_USER=$R_LIBS_USER:$location/R #to find SPP local package
 export PATH=$PATH:$location/scripts
 
 #------
